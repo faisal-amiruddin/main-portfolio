@@ -133,6 +133,8 @@ const CardNav = ({
 
   return (
     <div
+      data-aos="flip-up"
+      data-aos-duration="500"
       className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className}`}>
       <nav
         ref={navRef}
@@ -152,18 +154,18 @@ const CardNav = ({
             tabIndex={0}
             style={{ color: menuColor || '#000' }}>
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
               } group-hover:opacity-75`} />
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
               } group-hover:opacity-75`} />
           </div>
 
-          <div className='hidden lg:flex gap-15 font-semibold text-amber-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+          <div className='hidden sm:flex gap-15 font-semibold text-amber-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
             <a href="" className='cursor-target'>Home</a>
-            <a href="" className='cursor-target'>Project</a>
+            <a href="" className='cursor-target'>Projects</a>
             <a href="" className='cursor-target'>Contact</a>
           </div>
 

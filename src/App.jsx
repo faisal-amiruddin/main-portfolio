@@ -3,8 +3,25 @@ import TargetCursor from '@/components/TargetCursor'
 import Dither from '@/components/Dither'
 import CardNav from '@/components/CardNav'
 import SplitText from "@/components/SplitText";
+import AButton from '@/components/AButton';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+    });
+
+    // Tambahkan delay sedikit biar AOS tau posisi elemen React
+    setTimeout(() => {
+      AOS.refreshHard();
+    }, 500);
+  }, []);
+
+
   const items = [
     {
       label: "About",
@@ -69,7 +86,7 @@ function App() {
       <div className="flex flex-col justify-center items-center p-5 relative z-10 text-white py-40 pointer-events-none">
         <SplitText
           text="Faisal Amiruddin"
-          className="text-9xl font-extrabold text-center"
+          className="lg:text-9xl sm:text-6xl text-4xl font-extrabold text-center"
           delay={100}
           duration={0.6}
           ease="power3.out"
@@ -81,10 +98,13 @@ function App() {
           textAlign="center"
         />
 
-        <div className="flex gap-3 justify-center items-center font-extrabold text-5xl">
+        <div className="flex gap-3 justify-center items-center font-extrabold lg:text-5xl sm:text-3xl">
           <RotatingText
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+            data-aos-duration="2000"
             texts={['Full Stack Developer', 'Designer', 'Video Editor']}
-            mainClassName="pointer-events-auto cursor-target px-2 sm:px-2 md:px-3 bg-white text-black overflow-hidden py-0.5 justify-center rounded-lg"
+            mainClassName="pointer-events-auto cursor-target px-2 sm:px-2 md:px-3 bg-[#141E61] text-white overflow-hidden py-0.5 justify-center rounded-lg"
             staggerFrom={"last"}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
@@ -96,14 +116,7 @@ function App() {
           />
         </div>
 
-        <div className="py-7">
-          <a
-            href="#"
-            className="pointer-events-auto bg-white text-black font-semibold text-2xl cursor-target p-2 border rounded m-2 hover:bg-transparent hover:text-white hover:border-white hover:cursor-none"
-          >
-            Hire Me
-          </a>
-        </div>
+        {/* <AButton title="Hire Me" /> */}
       </div>
     </div>
   )
