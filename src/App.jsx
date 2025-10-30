@@ -54,9 +54,9 @@ function App() {
   ];
 
   return (
-    <div style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ width: '100%', position: 'relative' }}>
       {/* Background effect */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <Dither
           waveColor={[0.5, 0.5, 0.5]}
           disableAnimation={false}
@@ -117,6 +117,7 @@ function App() {
         </div>
 
         {/* <AButton title="Hire Me" /> */}
+
       </div>
     </div>
   )

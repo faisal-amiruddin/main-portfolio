@@ -164,9 +164,9 @@ const CardNav = ({
           </div>
 
           <div className='hidden sm:flex gap-15 font-semibold text-amber-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-            <a href="" className='cursor-target'>Home</a>
-            <a href="" className='cursor-target'>Projects</a>
-            <a href="" className='cursor-target'>Contact</a>
+            <a href="#" className='cursor-target'>Home</a>
+            <a href="#" className='cursor-target'>Projects</a>
+            <a href="#" className='cursor-target'>Contact</a>
           </div>
 
         </div>
