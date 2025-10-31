@@ -313,7 +313,7 @@ const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hid
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 w-0 h-0 pointer-events-none z-[9999] mix-blend-difference transform -translate-x-1/2 -translate-y-1/2"
+      className="hidden md:block fixed top-0 left-0 w-0 h-0 pointer-events-none z-[99999] mix-blend-difference transform -translate-x-1/2 -translate-y-1/2"
       style={{ willChange: 'transform' }}>
       <div
         ref={dotRef}

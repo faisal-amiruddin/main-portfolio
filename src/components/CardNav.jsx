@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
+import StaggeredMenu from './StaggeredMenu';
 
 const CardNav = ({
   items,
@@ -14,6 +15,19 @@ const CardNav = ({
   const navRef = useRef(null);
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
+
+  const menuItems = [
+    { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+    { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
+    { label: 'Services', ariaLabel: 'View our services', link: '/services' },
+    { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
+  ];
+
+  const socialItems = [
+    { label: 'Twitter', link: 'https://twitter.com' },
+    { label: 'GitHub', link: 'https://github.com' },
+    { label: 'LinkedIn', link: 'https://linkedin.com' }
+  ];
 
   const calculateHeight = () => {
     const navEl = navRef.current;
@@ -127,82 +141,75 @@ const CardNav = ({
     }
   };
 
-  const setCardRef = i => el => {
-    if (el) cardsRef.current[i] = el;
-  };
 
   return (
-    <div
-      data-aos="flip-up"
-      data-aos-duration="500"
-      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] ${className}`}>
-      <nav
-        ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} 
-          block h-[60px] p-0 rounded-xl relative overflow-hidden will-change-[height]
-          bg-gradient-to-br from-white/20 to-white/5 
-          backdrop-blur-md border border-white/20 shadow-lg
-          ${className}`}
-      >
-        <div
-          className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
+    <>
+      <div
+        data-aos="flip-up"
+        data-aos-duration="500"
+        className={`hidden sm:block card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[9999] top-[1.2em] md:top-[2em] ${className}`}>
+        <nav
+          ref={navRef}
+          className={`card-nav ${isExpanded ? 'open' : ''} 
+            block h-[60px] p-0 rounded-xl relative overflow-hidden will-change-[height]
+            bg-gradient-to-br from-white/20 to-white/5 
+            backdrop-blur-md border border-white/20 shadow-lg
+            ${className}`}
+        >
           <div
-            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} sm:hidden cursor-target group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
-            onClick={toggleMenu}
-            role="button"
-            aria-label={isExpanded ? 'Close menu' : 'Open menu'}
-            tabIndex={0}
-            style={{ color: menuColor || '#000' }}>
+            className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
-              } group-hover:opacity-75`} />
-            <div
-              className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
-              } group-hover:opacity-75`} />
-          </div>
-
-          <div className='hidden sm:flex gap-15 font-semibold text-amber-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-            <a href="#" className='cursor-target'>Home</a>
-            <a href="#" className='cursor-target'>Projects</a>
-            <a href="#" className='cursor-target'>Contact</a>
-          </div>
-
-        </div>
-
-        <div
-          className={`card-nav-content absolute left-0 right-0 top-[60px] bottom-0 p-2 flex flex-col items-stretch gap-2 justify-start z-[1] ${
-            isExpanded ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
-          } md:flex-row md:items-end md:gap-[12px]`}
-          aria-hidden={!isExpanded}>
-          {(items || []).slice(0, 3).map((item, idx) => (
-            <div
-              key={`${item.label}-${idx}`}
-              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[calc(0.75rem-0.2rem)] min-w-0 flex-[1_1_auto] h-auto min-h-[60px] md:h-full md:min-h-0 md:flex-[1_1_0%]"
-              ref={setCardRef(idx)}
-              style={{ backgroundColor: item.bgColor, color: item.textColor }}>
+              className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} sm:hidden cursor-target group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
+              onClick={toggleMenu}
+              role="button"
+              aria-label={isExpanded ? 'Close menu' : 'Open menu'}
+              tabIndex={0}
+              style={{ color: menuColor || '#000' }}>
               <div
-                className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
-                {item.label}
-              </div>
-              <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
-                {item.links?.map((lnk, i) => (
-                  <a
-                    key={`${lnk.label}-${i}`}
-                    className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
-                    href={lnk.href}
-                    aria-label={lnk.ariaLabel}>
-                    <GoArrowUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
-                    {lnk.label}
-                  </a>
-                ))}
-              </div>
+                className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+                  isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
+                } group-hover:opacity-75`} />
+              <div
+                className={`hamburger-line w-[30px] h-[2px] bg-white transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+                  isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
+                } group-hover:opacity-75`} />
             </div>
-          ))}
-        </div>
-      </nav>
+
+            <div className='hidden sm:flex gap-15 font-semibold text-amber-50 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+              <a href="#home" className='cursor-target hover:cursor-none'>Home</a>
+              <a href="#projects" className='cursor-target hover:cursor-none'>Projects</a>
+              <a href="#contact" className='cursor-target hover:cursor-none'>Contact</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        right: 0, 
+        zIndex: 9998, 
+        pointerEvents: 'auto'
+      }}
+      className='sm:hidden block'
+      >
+      <StaggeredMenu
+        position="right"
+        items={menuItems}
+        socialItems={socialItems}
+        displaySocials={true}
+        displayItemNumbering={true}
+        menuButtonColor="#fff"
+        openMenuButtonColor="#000"
+        changeMenuColorOnOpen={true}
+        colors={['#B19EEF', '#5227FF']}
+        logoUrl="/path-to-your-logo.svg"
+        accentColor="#ff6b6b"
+        onMenuOpen={() => console.log('Menu opened')}
+        onMenuClose={() => console.log('Menu closed')}
+      />
     </div>
+    </>
   );
 };
 

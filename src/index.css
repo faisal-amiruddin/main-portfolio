@@ -82,6 +82,14 @@ html, body, #root {
   padding: 0;
 }
 
+div.fp-right span {
+  background-color: white;
+}
+
+div.fp-watermark {
+    display: none;
+}
+
 .dark {
   font-family: "Anek Latin";
   --background: oklch(0.145 0 0);
